@@ -49,10 +49,10 @@ class InitializeTenancyByRequestDomain extends InitializeTenancyByRequestData
         $domainTable = Domain::where('domain',$subdomain)->first();
 
         if (!$domainTable) {
-            $onFail = static::$onFail ?? function ($e) {
-                throw $e;
-            };
-            return $onFail($subdomain, $request, $next);
+            return response()->json([
+                'success' => false,
+                'message' => 'Institución no encontrada'
+            ], 404);
         }
         
         return $this->initializeTenancy(

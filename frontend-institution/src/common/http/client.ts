@@ -72,7 +72,10 @@ export class HttpClient {
     const formData = FormRequest.build(data as object);
     return tryHttpRequest<T>(() =>
       this.#http.post(url, formData, {
-        headers: FORM_DATA_HEADERS,
+        headers: {
+          ...JSON_HEADERS,
+          ...FORM_DATA_HEADERS,
+        },
       })
     );
   }

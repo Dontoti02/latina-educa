@@ -32,7 +32,16 @@ class InitializeTenancyByRequestDomain extends InitializeTenancyByRequestData
      */
     public function handle($request, Closure $next)
     {
-        $subdomain = $this->makeSubdomain($request->header('X-subdomain')); 
+        $hostname = $request->header('X-subdomain') ?? $request->getHost();
+
+        if (empty($hostname)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Header X-subdomain requerido'
+            ], 400);
+        }
+
+        $subdomain = $this->makeSubdomain($hostname); 
 
         if (is_object($subdomain) && $subdomain instanceof Exception) {
             $onFail = static::$onFail ?? function ($e) {

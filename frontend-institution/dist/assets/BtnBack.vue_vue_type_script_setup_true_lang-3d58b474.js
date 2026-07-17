@@ -1,1 +1,0 @@
-import{d as e,o,b as a,W as r,ef as c}from"./index-88a109f2.js";const _=e({__name:"BtnBack",setup(s){const t=()=>{c.back()};return(p,n)=>(o(),a(r,{variant:"tonal",icon:"tabler-chevron-left",density:"compact",rounded:"sm",onClick:n[0]||(n[0]=i=>t())}))}});export{_};

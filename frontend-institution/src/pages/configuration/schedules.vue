@@ -55,12 +55,10 @@ let refetchEvents: () => void
 let loadingCalendarData: Ref<boolean>
 
 const setUpCalendar = () => {
-  if (!(session.isSecretary()||session.isAdmin())) {
-    nextTick(() => {
-      if (content)
-        calendarApi.value = refCalendar.value.getApi()
-    })
-  }
+  nextTick(() => {
+    if (content && refCalendar?.value)
+      calendarApi.value = refCalendar.value.getApi()
+  })
 }
 
 // Schedule

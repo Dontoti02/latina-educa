@@ -260,6 +260,8 @@ class InstitutionRepository
 
         $parameterDomain = SystemConfigurationHelper::getDomain();
         $parameterUser = SystemConfigurationHelper::getDefaultUser();
+        $defaultEmail = $parameterUser->email ?? $parameterUser->name ?? null;
+        $defaultNames = $parameterUser->names ?? $parameterUser->name ?? null;
 
         $institution = Institution::where('id', $institutionId)->with('domain.tenant')->first();
 
@@ -275,13 +277,13 @@ class InstitutionRepository
 
         $person = Person::create([
             'document_number' => 'xxxxxxxx',
-            'names' => $parameterUser->names,
+            'names' => $defaultNames,
             'phone' => 'xxxxxxxxx',
         ]);
 
         $user = User::create([
             'person_id' => $person->id,
-            'email' => $parameterUser->email,
+            'email' => $defaultEmail,
             'rol_id' => RolTenant::ADMINISTRADOR,
             'password' => Hash::make($parameterUser->password),
             'default_user' => true
@@ -300,8 +302,8 @@ class InstitutionRepository
             'domain' => $parameterDomain,
             'tenatSubdomain' => $domainTenant,
             'user' =>  [
-                'email' => $parameterUser->email,
-                'name' => $parameterUser->names,
+                'email' => $defaultEmail,
+                'name' => $defaultNames,
                 'password' => $parameterUser->password
             ]
         ];
@@ -401,11 +403,12 @@ class InstitutionRepository
         ];
 
         $userDefault = SystemConfigurationHelper::getDefaultUser();
+        $defaultEmail = $userDefault->email ?? $userDefault->name ?? null;
 
         $tenantUser = DB::table("$tenant.user")
             ->select('user.email', 'person.names')
             ->join("$tenant.person", 'user.person_id', 'person.id')
-            ->where('user.email', $userDefault->email)
+            ->where('user.email', $defaultEmail)
             ->first();
 
         $user = $tenantUser

@@ -69,9 +69,9 @@ class SystemConfigurationRepository
             $value = json_decode($request->value);
 
             InstitutionHelper::updateDefaultAdminUser(
-                $value->email,
+                $value->email ?? $value->name ?? null,
                 $value->password,
-                $value->names
+                $value->names ?? $value->name ?? null
             );
         }
 

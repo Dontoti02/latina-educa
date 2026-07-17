@@ -17,7 +17,7 @@ class SessionManager
     public static function get()
     {
 
-        return (object)Request::get(self::JWT_SESSION);
+        return (object) request()->input(self::JWT_SESSION);
     }
 
 }

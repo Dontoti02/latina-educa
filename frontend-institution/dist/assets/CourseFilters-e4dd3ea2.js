@@ -1,0 +1,1 @@
+import{_ as o}from"./CourseFilters.vue_vue_type_script_setup_true_lang-e308a7d4.js";import"./VBadge-09d75909.js";import"./index-88a109f2.js";import"./VRow-8870a4ac.js";import"./VSwitch-f360f1cb.js";import"./VSelectionControl-ec9d35ba.js";import"./VSpacer-833e7f96.js";import"./VMenu-808d8811.js";export{o as default};

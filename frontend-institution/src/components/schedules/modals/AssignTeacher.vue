@@ -40,7 +40,7 @@ const form = ref<AssignTeacherForm>({
 // Get params
 const getClassrooms = async () => {
   return ScheduleService.getClassroomsExistingForSchedule(props.formByClassroom).then(response => {
-    if(response.data.length === 0) {
+    if(!response.data || response.data.length === 0) {
       ToastService.error('No hay ningún curso con horario asignado.')
       emit('close')
     }
@@ -144,7 +144,7 @@ const assignTeacher = () => {
 }
 
 const submit = () => {
-  if (!formValid) {
+  if (!formValid.value) {
     ToastService.error('Complete los campos requeridos')
 
     return

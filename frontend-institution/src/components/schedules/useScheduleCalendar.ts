@@ -117,8 +117,8 @@ export const useScheduleCalendar = (
     ScheduleService.getSchedules(formByClassroom.value)
       .then(r => {
         classroomsWithColors = []
-        successCallback(r.data.flatMap((e: Schedule) =>
-          e.days.map(day => ({
+        successCallback((r.data || []).flatMap((e: Schedule) =>
+          (e.days || []).map(day => ({
             id: day.id.toString(),
             daysOfWeek: [day.day],
             startTime: `${day.hour_start}`,

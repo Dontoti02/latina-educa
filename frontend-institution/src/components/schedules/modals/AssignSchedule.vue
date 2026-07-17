@@ -65,7 +65,7 @@ const setup = () => {
 const getParams = async () => {
   loadingParams.value = true
   ScheduleService.getClassroomsForSchedule(props.formByClassroom).then(response => {
-    if(response.data.length === 0) {
+    if(!response.data || response.data.length === 0) {
       ToastService.error('No existen cursos.')
       emit('close')
     }

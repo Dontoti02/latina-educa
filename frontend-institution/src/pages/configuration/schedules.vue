@@ -107,7 +107,7 @@ const getFilters = () => {
     } else {
       formByClassroom.value.period_id = 0
     }
-    daysAvailable.value = Object.keys(response.data.days).map(Number)
+    daysAvailable.value = Object.keys(response.data?.days || {}).map(Number)
 
     // 👉 useCalendar
     const {

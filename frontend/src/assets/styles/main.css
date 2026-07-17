@@ -1,0 +1,22 @@
+@import './normalize.css';
+@import './base.css';
+
+@font-face {
+  font-family: var(--font-family-material);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  src: url(https://fonts.gstatic.com/s/materialicons/v141/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-light-grey-color);
+  border-radius: 10px;
+}

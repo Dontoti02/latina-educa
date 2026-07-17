@@ -1,0 +1,99 @@
+stages:
+  - install
+  - build
+  - deploy
+
+install_dependencies:
+  stage: install
+  image: node:20-alpine
+  script:
+    - npm install
+  only:
+  - main
+  - qa
+  cache:
+    paths:
+      - node_modules
+    key:
+      files:
+        - package-lock.json
+
+build-prod:
+  image: node:20-alpine
+  stage: build
+  script:
+    - npm run build:prod
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/dist
+  only:
+  - main
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+      - $CI_PROJECT_DIR/dist
+    policy: pull
+
+
+deploy-prod:
+  stage: deploy
+  image: alpine
+  before_script:
+    - apk add zip
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DIGITAL_OCEAN_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - zip -r frontend_admin_build.zip $CI_PROJECT_DIR/dist
+    - scp -o StrictHostKeyChecking=no frontend_admin_build.zip $USER_DIGITAL_OCEAN@$IPADDRESS_DIGITAL_OCEAN:/home/builds
+    - ssh -o StrictHostKeyChecking=no $USER_DIGITAL_OCEAN@$IPADDRESS_DIGITAL_OCEAN "cd /home/builds; touch foo.txt; unzip -o frontend_admin_build.zip -d /var/www/html"
+  only:
+  - main
+  cache:
+    paths:
+      - $CI_PROJECT_DIR/dist
+ 
+
+build-qa:
+  image: node:20-alpine
+  stage: build
+  script:
+    - npm run build:qa
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/dist
+  only:
+  - qa
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+      - $CI_PROJECT_DIR/dist
+    policy: pull
+
+deploy-qa:
+  stage: deploy
+  image: alpine
+  before_script:
+    - apk add zip
+    - apk add openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_DIGITAL_OCEAN_PRIVATE_KEY_QA" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+  script:
+    - zip -r frontend_admin_build.zip $CI_PROJECT_DIR/dist
+    - scp -o StrictHostKeyChecking=no frontend_admin_build.zip $USER_DIGITAL_OCEAN_QA@$IPADDRESS_DIGITAL_OCEAN_QA:/home/builds
+    - ssh -o StrictHostKeyChecking=no $USER_DIGITAL_OCEAN_QA@$IPADDRESS_DIGITAL_OCEAN_QA "cd /home/builds; touch foo.txt; unzip -o frontend_admin_build.zip -d /var/www/html"
+  only:
+  - qa
+  cache:
+    paths:
+      - $CI_PROJECT_DIR/dist

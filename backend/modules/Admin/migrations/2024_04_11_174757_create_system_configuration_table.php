@@ -38,7 +38,7 @@ return new class extends Migration
             'key' => 'domain',
             'name' => 'Dominio',
             'type' => 'string',
-            'value' => 'latinaeduca.com',
+            'value' => 'iestphuallaga.cloud',
             'created_at' => $date,
             'updated_at' => $date,
         ]);

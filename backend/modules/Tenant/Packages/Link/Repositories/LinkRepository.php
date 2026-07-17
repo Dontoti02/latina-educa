@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Tenant\Packages\File\Repositories;
+namespace Modules\Tenant\Packages\Link\Repositories;
 
 use Exception;
 use Illuminate\Http\Request;
 use Modules\Tenant\Models\Link;
 use Modules\Tenant\Packages\Answer\Helpers\AnswerHelper;
 use Modules\Tenant\Packages\Content\Helpers\ContentHelper;
-use Modules\Tenant\Packages\File\Helpers\LinkHelper;
+use Modules\Tenant\Packages\Link\Helpers\LinkHelper;
 use Modules\Tenant\Packages\Publication\Helpers\PublicationHelper;
 use Modules\Tenant\Packages\Training\Helpers\TrainingAnswerHelper;
 use Modules\Tenant\Packages\Training\Helpers\TrainingContentHelper;

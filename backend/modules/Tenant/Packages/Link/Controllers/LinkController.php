@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\Tenant\Packages\File\Controllers;
+namespace Modules\Tenant\Packages\Link\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Modules\Tenant\Packages\File\UseCases\LinkUseCases;
+use Modules\Tenant\Packages\Link\UseCases\LinkUseCases;
 
 class LinkController extends Controller
 {

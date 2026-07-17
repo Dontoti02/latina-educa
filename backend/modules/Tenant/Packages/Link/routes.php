@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Tenant\Middleware\AuthTenantMiddleware;
 use Modules\Tenant\Middleware\DomainTenantMiddleware;
 use Modules\Tenant\Middleware\SubscriptionTenantMiddleware;
-use Modules\Tenant\Packages\File\Controllers\LinkController;
+use Modules\Tenant\Packages\Link\Controllers\LinkController;
 
 #rutas publicas
 Route::group(['middleware' => [

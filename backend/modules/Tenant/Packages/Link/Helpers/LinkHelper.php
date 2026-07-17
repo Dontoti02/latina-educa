@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Tenant\Packages\File\Helpers;
+namespace Modules\Tenant\Packages\Link\Helpers;
 
 use Exception;
 use Illuminate\Http\Request;

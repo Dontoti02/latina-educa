@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Tenant\Packages\File\UseCases;
+namespace Modules\Tenant\Packages\Link\UseCases;
 
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\Shared\Utils\Response;
-use Modules\Tenant\Packages\File\Repositories\LinkRepository;
+use Modules\Tenant\Packages\Link\Repositories\LinkRepository;
 
 class LinkUseCases
 {
